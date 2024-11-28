@@ -1,14 +1,14 @@
-import sbt._
-import sbt.Keys._
-import sbtbuildinfo._
-import BuildInfoKeys._
+import sbt.*
+import sbt.Keys.*
+import sbtbuildinfo.*
+import sbtbuildinfo.BuildInfoKeys.*
 
 object BuildHelper {
   // Align with zio-schema since we have a deep dependency on it
-  val Scala212                = "2.12.19"
-  val Scala213                = "2.13.12"
-  val Scala3                  = "3.3.1"
-  private val SilencerVersion = "1.7.17"
+  val Scala212                = "2.12.20"
+  val Scala213                = "2.13.15"
+  val Scala3                  = "3.3.4"
+  private val SilencerVersion = "1.7.19"
 
   private val stdOptions = Seq(
     "-encoding",
@@ -99,7 +99,7 @@ object BuildHelper {
             ("com.github.ghik"                % "silencer-lib"    % SilencerVersion % Provided)
               .cross(CrossVersion.full),
             compilerPlugin(("com.github.ghik" % "silencer-plugin" % SilencerVersion).cross(CrossVersion.full)),
-            compilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
+            compilerPlugin(("org.typelevel"  %% "kind-projector"  % "0.13.3").cross(CrossVersion.full))
           )
       },
       incOptions ~= (_.withLogRecompileOnMacro(false))
